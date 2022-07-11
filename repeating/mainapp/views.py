@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from datetime import datetime
 
 class MainPageView(TemplateView):
     template_name = "mainapp/index.html"
@@ -7,6 +8,13 @@ class MainPageView(TemplateView):
 class NewsPageView(TemplateView):
     template_name = "mainapp/news.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["news_title"] = "my title"
+        context["news_preview"] = "my preview"
+        context["range"] = range(5)
+        context["datetime_obj"] = datetime.now()
+        return context
 
 class CoursesPageView(TemplateView):
     template_name = "mainapp/courses_list.html"
